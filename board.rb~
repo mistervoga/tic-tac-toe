@@ -1,0 +1,39 @@
+class Board
+  attr_accessor :board
+
+  def initialize
+    @board = (1..9).to_a
+  end
+
+  def place_piece(player, position)
+    @board[position] = player.symbol
+  end
+
+  def show_board
+    puts "#---+---+---+---#"
+    @board.each_with_index do |value, index|
+      if (index % 3 == 0)
+        puts "+---#{value}"
+      elsif (index % 3 == 1)
+        puts "---#{value}---"
+      else
+        puts "#{value}---+"
+      end
+    end
+    puts "#---+---+---+---#"
+  end
+
+  def to_s
+    show_board
+  end
+
+  private
+
+  def is_placed?(position)
+    symbol = ["X", "0"]
+    if  @board[position] == symbol.any?
+      return true
+    end
+  end
+end
+
