@@ -2,7 +2,7 @@ class Game
   require_relative "player.rb"
   require_relative "board.rb"
 
-  @@WINNING_POSITIONS = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 5, 9], [3, 5, 7], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
+
 
   def initialize
     @board = Board.new
@@ -15,13 +15,15 @@ class Game
     if answer.upcase == symbol[0]
       @player1 = Player.new(symbol[0])
       @player2 = Player.new(symbol[1])
+      puts "Therefore Player 2 gets the opposite"
     elsif answer.upcase == symbol[1]
       @player1 = Player.new(symbol[1])
       @player2 = Player.new(symbol[0])
-    else
-      
+      puts "Therefore Player 2 gets the opposite"
+     else
+      puts "This is not a valid symbol!"
+      self.initialize_player
     end
-    puts "Therefore Player 2 gets the opposite!"
   end
 
   def intro
@@ -31,13 +33,9 @@ class Game
     puts "diagonally, wins the game."
   end
 
-  def check_win(player)
-    player.moves.each do |i|
-      
-      
-    end
-  end
-  
+
+  #compose all functions together to play the game
+
   def play_round
     self.intro
     self.initialize_player
@@ -49,12 +47,12 @@ class Game
         current_player = @player2
       end
       @board.show_board
-      puts "Click one number to place your symbol. Choose wisely :D"
+      puts "Enter a number to place your symbol. Choose wisely :D"
       answer = gets.chomp
-      current_player.moves << answer
       @board.place_symbol(current_player, answer)
-      check_win(current_player)
-      turn +=1
+      current_player.moves << answer.to_i
+      @board.check_win(current_player)
+      turn += 1
     end
   end
 end

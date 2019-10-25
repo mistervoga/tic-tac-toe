@@ -1,6 +1,8 @@
 class Board
   attr_accessor :board
 
+    @@WINNING_POSITIONS = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 5, 9], [3, 5, 7], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
+
   def initialize
     @board = ("1""2""3""4""5""6""7""8""9")
   end
@@ -17,18 +19,18 @@ class Board
     puts "#---+---+---+---#"
   end
 
-  def to_s
-    show_board
+  def check_win(player)
+    @@WINNING_POSITIONS.each do |i, j|
+        if @@WINNING_POSITIONS[i] == player.moves
+          puts "#{player} wins the game!"
+          true
+        end
+      end
+    false
   end
 
-  private
-
-  def is_placed?(position)
-    symbol = ["X", "O"]
-    if  symbol.any?(@board[position])
-      return true
-    end
-    false
+  def to_s
+    show_board
   end
 end
 
