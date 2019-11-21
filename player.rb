@@ -5,4 +5,7 @@ attr_accessor :symbol, :moves
     @symbol = symbol
     @moves = []
   end
+
+  def to_s
+  end
 end

@@ -1,8 +1,9 @@
 class Board
   attr_accessor :board
 
-    @@WINNING_POSITIONS = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 5, 9], [3, 5, 7], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
+  @@WINNING_POSITIONS = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 5, 9], [3, 5, 7], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
 
+  
   def initialize
     @board = ("1""2""3""4""5""6""7""8""9")
   end
@@ -20,13 +21,23 @@ class Board
   end
 
   def check_win(player)
-    @@WINNING_POSITIONS.each do |i, j|
-        if @@WINNING_POSITIONS[i] == player.moves
-          puts "#{player} wins the game!"
-          true
+        permutation = player.moves.combination(3).to_a
+        @@WINNING_POSITIONS.each do |i|
+          permutation.each do |j|
+                if i.sort == j.sort
+                    puts "Congratulations #{player}, you win!"
+                    return true
+                end
+            end
         end
-      end
-    false
+      return false
+  end
+
+  def tie?
+    if @player1.moves + @player2.moves > 8
+      puts "It's a tie"
+    end
+    
   end
 
   def to_s
@@ -34,3 +45,5 @@ class Board
   end
 end
 
+
+board = Board.new

@@ -2,8 +2,6 @@ class Game
   require_relative "player.rb"
   require_relative "board.rb"
 
-
-
   def initialize
     @board = Board.new
   end
@@ -15,7 +13,7 @@ class Game
     if answer.upcase == symbol[0]
       @player1 = Player.new(symbol[0])
       @player2 = Player.new(symbol[1])
-      puts "Therefore Player 2 gets the opposite"
+      puts "Therefore Player 2 gets the opposite."
     elsif answer.upcase == symbol[1]
       @player1 = Player.new(symbol[1])
       @player2 = Player.new(symbol[0])
@@ -51,8 +49,15 @@ class Game
       answer = gets.chomp
       @board.place_symbol(current_player, answer)
       current_player.moves << answer.to_i
-      @board.check_win(current_player)
+      if @board.check_win(current_player)
+        @board.show_board
+        break
+      end
       turn += 1
+      if turn > 8
+        puts "It's a draw! Good game!"
+        @board.show_board
+      end
     end
   end
 end

@@ -1,0 +1,12 @@
+class Player
+  attr_accessor :symbol, :moves, :name
+  
+  def initialize(symbol, name)
+    @name = name
+    @symbol = symbol
+    @moves = []
+  end
+
+  def to_s
+  end
+end
